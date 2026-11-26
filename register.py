@@ -1,5 +1,6 @@
 import datetime
 import csv
+import os
 
 # Pede um horário até vir no formato HH:MM e devolve sempre uma string padronizada
 def pedir_hora(pergunta):
@@ -30,8 +31,13 @@ print(f"Tempo para estudos: {estudo_min} min")
 print(f"Tempo para hobbies: {hobbies_min} min")
 print(f"Nível de energia: {nivel_energia}")
 
+
+# Confere a existência do arquivo e adiciona as respostas nas colunas
+arquivo_existe = os.path.exists("data/rotina.csv")
+
 with open("data/rotina.csv", "a", newline="") as csvfile:
     escritor = csv.writer(csvfile)
-    escritor.writerow([data,hora_dormiu,hora_acordou,tempo_tela_min,estudo_min,hobbies_min,nivel_energia])
-    
+    if not arquivo_existe:
+        escritor.writerow(["data", "hora_dormiu", "hora_acordou", "tempo_tela_min", "estudo_min", "hobbies_min", "nivel_energia"])
+    escritor.writerow([data,hora_dormiu,hora_acordou,tempo_tela_min,estudo_min,hobbies_min,nivel_energia])  
 print("Registro de hoje salvo!\n")
