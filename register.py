@@ -1,4 +1,5 @@
 import datetime
+import csv
 
 # Pede um horário até vir no formato HH:MM e devolve sempre uma string padronizada
 def pedir_hora(pergunta):
@@ -28,3 +29,9 @@ print(f"Tempo de tela: {tempo_tela_min} min")
 print(f"Tempo para estudos: {estudo_min} min")
 print(f"Tempo para hobbies: {hobbies_min} min")
 print(f"Nível de energia: {nivel_energia}")
+
+with open("data/rotina.csv", "a", newline="") as csvfile:
+    escritor = csv.writer(csvfile)
+    escritor.writerow([data,hora_dormiu,hora_acordou,tempo_tela_min,estudo_min,hobbies_min,nivel_energia])
+    
+print("Registro de hoje salvo!\n")
